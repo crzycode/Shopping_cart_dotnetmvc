@@ -1,0 +1,36 @@
+﻿@model Shopping_cart_dotnetmvc.Models.ConfirmOrder
+@{
+    ViewBag.Title = "confirmorder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int gst = Model.Totalamount * 18 / 100;
+    int total = Model.Totalamount + gst;
+}
+
+<h2>confirmorder</h2>
+<table class="table">
+    @foreach (var item in Model.Product)
+    {
+        <tr>
+            <th>@item.id</th>
+            <th>@item.product_name X @item.product_quantity</th>
+            <td>@item.pricexquantity</td>
+        </tr>
+    }
+
+    <tr>
+        <th>Sub total</th>
+        <td>@Model.Totalamount</td>
+    </tr>
+    <tr>
+        <th>Gst 18%</th>
+        <td> @gst</td>
+    </tr>
+    <tr>
+        <th>Total Amount</th>
+        <td>@total</td>
+    </tr>
+    <tr>
+        <td> <a href="@Url.Action("placeorder","Home")" class="btn btn-primary btn-lg">Confirm</a> </td>
+        <td> <a href="@Url.Action("cancleorder","Home")" class="btn btn-danger btn-lg">Cancle</a> </td>
+    </tr>
+</table>

@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form action="@Url.Action("login","Home")" method="post">
+    <input type="text" name="email" placeholder="email" required /><br />
+
+    <input type="text" name="pwd" />
+    <input type="submit" name="btn_submit_login" value="Login" />
+</form>
+

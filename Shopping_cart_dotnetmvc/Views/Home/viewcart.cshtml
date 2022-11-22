@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Shopping_cart_dotnetmvc.Models.ViewCart>
+@{
+    int count = 0;
+    ViewBag.Title = "viewcart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string finaltotal = "0";
+}
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Total Price</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@count</td>
+                <td>@item.Viewcart_product_name</td>
+                <td> <img style="height:40px; width:40px;" src="~/Content/Image/@item.Viewcart_product_image" alt="Alternate Text" /> </td>
+                <td>@item.Viewcart_product_quantity</td>
+                <td>@item.Viewcart_product_price</td>
+                <td>@item.Viewcart_product_totalprice</td>
+                <td>
+                    <span class="h2" style="cursor:pointer;" onclick="increase(@item.Viewcart_product_id,@count)">+</span><h2 class="inc_count">@item.Viewcart_product_quantity</h2>
+                    <span class="h2" style="cursor:pointer;" onclick="decrease(@item.Viewcart_product_id,@count)">-</span>
+                </td>
+            </tr>
+
+            count++;
+            finaltotal = Convert.ToString(Convert.ToInt32(finaltotal) + Convert.ToInt32(item.Viewcart_product_totalprice));
+        }
+        <tr>
+            <td colspan="5">Final Price:</td>
+            <td colspan="5">@finaltotal</td>
+        </tr>
+        <tr>
+            <td colspan="4"></td>
+            <td > <a href="@Url.Action("Proceedtocheckout","Home")" class="btn btn-primary">Place Order</a></td>
+            <td colspan="4"></td>
+        </tr>
+
+    </tbody>
+</table>
+
